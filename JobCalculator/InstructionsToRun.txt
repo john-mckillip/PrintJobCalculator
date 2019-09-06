@@ -1,0 +1,4 @@
+﻿1. Hit Ctrl + F5.
+2. Select the number of products for the job. Must be greater than zero.
+3. Enter the product data and click Calculate.
+4. Click Start Over to calculate a new job.

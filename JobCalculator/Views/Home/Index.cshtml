@@ -1,0 +1,27 @@
+﻿@model JobCalculator.Models.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="col-md-6">
+    <h1>How Many Products in the Job?</h1>
+    <br />
+</div>
+<div class="col-md-6 justify-content-md-center">
+
+    @await Html.PartialAsync("_FormErrors", ViewData.ModelState.Values.SelectMany(s => s.Errors))
+
+    <form asp-controller="Home" asp-action="SetProducts" method="post">
+
+        <div class="form-group">
+            <label asp-for="NumberOfProducts"></label>
+            <input class="form-control" asp-for="NumberOfProducts" />
+        </div>
+        
+        <input type="submit" class="btn btn-primary" name="continue" value="Continue" />
+
+    </form>
+</div>
+
+<br/>

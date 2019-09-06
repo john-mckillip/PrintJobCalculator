@@ -1,0 +1,53 @@
+﻿@model JobCalculator.Models.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Calculate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="col-md-6">
+    <h1>Calculate Bill For Job</h1>
+    <br />
+</div>
+<div class="col-md-6 justify-content-md-center">
+
+    @await Html.PartialAsync("_FormErrors", ViewData.ModelState.Values.SelectMany(s => s.Errors))
+
+    <form asp-controller="Home" asp-action="Calculate" method="post">
+
+        <div class="form-check">
+            @Html.CheckBoxFor(m => m.MockJob.AddExtraMargin, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.MockJob.AddExtraMargin, new { @class = "form-check-label" })
+            <br />
+        </div>
+
+        <br />
+        @for (var i = 0; i < Model.MockJob.Items.Count; i++)
+        {
+            <div class="form-group">
+                @Html.LabelFor(x => Model.MockJob.Items[i].ProductName)
+                @Html.TextBoxFor(x => Model.MockJob.Items[i].ProductName, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => Model.MockJob.Items[i].ProductPrice)
+                @Html.TextBoxFor(x => Model.MockJob.Items[i].ProductPrice, new { @type = "number", @step = ".01", @class = "form-control" })
+            </div>
+
+            <div class="form-check">
+                @Html.CheckBoxFor(x => Model.MockJob.Items[i].TaxExempt, new { @class = "form-check-input" })
+                @Html.LabelFor(m => Model.MockJob.Items[i].TaxExempt, new { @class = "form-check-label" })
+            </div>
+            <br />
+
+            @Html.HiddenFor(m => Model.MockJob.Items[i].SalesTax)
+        }
+
+        @Html.HiddenFor(m => m.MockJob.ExtraMargin)
+        @Html.HiddenFor(m => m.MockJob.Margin)
+
+        <input type="submit" class="btn btn-primary" name="calculate" value="Calculate" />
+
+    </form>
+</div>
+
+<br />

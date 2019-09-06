@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding;
+@model IEnumerable<ModelError>
+
+@if (Model?.Any() == true)
+{
+    foreach (ModelError modelError in Model)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@modelError.ErrorMessage</p>
+        </div>
+    }
+}
